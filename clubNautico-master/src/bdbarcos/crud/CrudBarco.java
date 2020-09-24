@@ -38,6 +38,7 @@ public class CrudBarco {
             pps.setInt(6, B.getIdSocio());
             pps.setString(7, B.getNombreSocio());
             
+//            System.out.println(B.getId()+" "+B.getMatricula()+" "+B.getNombre()+" "+B.getNumeroAmarre()+" "+B.getCuota()+" "+B.getIdSocio()+" "+B.getNombreSocio());
 
             pps.executeUpdate();
             

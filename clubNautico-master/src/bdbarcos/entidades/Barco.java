@@ -18,6 +18,21 @@ public class Barco {
     private float cuota;
     private String nombreSocio;
     private int idSocio;
+
+    public Barco(){
+        
+    }
+    
+    public Barco(int id, String matricula, String nombre, int numeroAmarre, float cuota,int idSocio, String nombreSocio) {
+        this.id = id;
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.numeroAmarre = numeroAmarre;
+        this.cuota = cuota;
+        this.nombreSocio = nombreSocio;
+        this.idSocio=idSocio;
+    }
+    
     
 
     public int getId() {

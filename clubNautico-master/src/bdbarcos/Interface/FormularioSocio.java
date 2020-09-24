@@ -25,8 +25,8 @@ import javax.swing.table.DefaultTableModel;
  * @author copad
  */
 public class FormularioSocio extends javax.swing.JFrame {
-     ArrayList<Socio> datosDB=new ArrayList();
-     CrudSocio opCrud=new CrudSocio();
+     private ArrayList<Socio> datosDB=new ArrayList();
+     private CrudSocio opCrud=new CrudSocio();
     /**
      * Creates new form FormularioCliente
      */
