@@ -231,7 +231,7 @@ public class FormularioBarco extends javax.swing.JFrame {
             }
         });
 
-        botonCancelar.setText("Actualizar");
+        botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);

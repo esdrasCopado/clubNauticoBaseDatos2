@@ -167,6 +167,12 @@ public class FormularioSalida extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+
         TablaSalidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -204,6 +210,11 @@ public class FormularioSalida extends javax.swing.JFrame {
         ButtonCancelar.setText("Cancelar");
 
         ButtonBuscar.setText("Buscar");
+        ButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonBuscarActionPerformed(evt);
+            }
+        });
 
         ButtonEditar.setText("Editar");
         ButtonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -272,9 +283,9 @@ public class FormularioSalida extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                            .addComponent(ButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                            .addComponent(ButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,6 +407,67 @@ public class FormularioSalida extends javax.swing.JFrame {
         actualizarTabla();
         limpiar();
     }//GEN-LAST:event_ButtonEditarActionPerformed
+
+    private void ButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarActionPerformed
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("HoraSalida");
+        modelo.addColumn("Direccion");
+        modelo.addColumn("IdBarco");
+        modelo.addColumn("NombreBarco");
+
+        TablaSalidas.setModel(modelo);
+
+        String datos[] = new String[5];
+
+        ResultSet resultSet;
+        Statement statement;
+        
+        int idSalida=Integer.parseInt(Busqueda.getText());
+
+        try {
+            
+            ConexionBaseDatos con = new ConexionBaseDatos();
+            Connection co = con.getConexionBaseDatos();
+            
+            PreparedStatement pps=co.prepareStatement("SELECT * FROM salida where id=?;");
+            
+            pps.setInt(1, idSalida);
+            
+            pps.executeQuery();
+            
+            
+            while (pps.getResultSet().next()) {
+
+                Salida salida = new Salida();
+
+                salida.setIdSalida(pps.getResultSet().getInt(1));
+                salida.setHoraSalida(pps.getResultSet().getString(2));
+                salida.setDireccion(pps.getResultSet().getString(3));
+                salida.setIdBarco(pps.getResultSet().getInt(4));
+                salida.setNombreBarco(pps.getResultSet().getString(5));
+
+                datos[0] = String.valueOf(salida.getIdSalida());
+                datos[1] = String.valueOf(salida.getHoraSalida());
+                datos[2] = String.valueOf(salida.getDireccion());
+                datos[3] = String.valueOf(salida.getIdBarco());
+                datos[4] = String.valueOf(salida.getNombreBarco());
+
+                datosDB.add(salida);
+                modelo.addRow(datos);
+            }
+            TablaSalidas.setModel(modelo);
+        } catch (SQLException e) {
+            System.out.println("error " + e.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_ButtonBuscarActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        
+        limpiar();
+    }//GEN-LAST:event_jPanel1MouseClicked
 
    
 
