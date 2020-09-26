@@ -37,7 +37,7 @@ public class FormularioBarco extends javax.swing.JFrame {
         TexId.setEditable(false);
     }
      public void actualizarTabla(){
-         DefaultTableModel modelo=new DefaultTableModel();
+        DefaultTableModel modelo=new DefaultTableModel();
         modelo.addColumn("id");
         modelo.addColumn("matricula");
         modelo.addColumn("nombre");
@@ -137,6 +137,7 @@ public class FormularioBarco extends javax.swing.JFrame {
      
      public void limpiar(){
         
+         TexId.setText("");
         TextMatricula.setText("");
         TextNombre.setText("");
         TextAmarre.setText("");
@@ -166,15 +167,23 @@ public class FormularioBarco extends javax.swing.JFrame {
         Busqueda = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         botonGuardar = new javax.swing.JToggleButton();
-        botonActualizar = new javax.swing.JToggleButton();
+        botonCancelar = new javax.swing.JToggleButton();
         botonBuscar = new javax.swing.JToggleButton();
         ComboBoxSocio = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         TextMatricula = new javax.swing.JTextField();
         TextAmarre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        botonBuscar1 = new javax.swing.JToggleButton();
+        botonBorrar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         TablaBarcos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,18 +231,37 @@ public class FormularioBarco extends javax.swing.JFrame {
             }
         });
 
-        botonActualizar.setText("Actualizar");
-        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar.setText("Actualizar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonActualizarActionPerformed(evt);
+                botonCancelarActionPerformed(evt);
             }
         });
 
-        botonBuscar.setText("Buscar");
+        botonBuscar.setText("editar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("socio");
 
         jLabel7.setText("Amarre");
+
+        botonBuscar1.setText("Buscar");
+        botonBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscar1ActionPerformed(evt);
+            }
+        });
+
+        botonBorrar.setText("borrar");
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -241,26 +269,23 @@ public class FormularioBarco extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(10, 10, 10)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(botonGuardar)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TexId, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(botonActualizar))
+                            .addComponent(botonGuardar))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel6)
-                            .addGap(47, 47, 47)
+                            .addGap(84, 84, 84)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ComboBoxSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TextCuota, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(TextCuota, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(TexId, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(botonCancelar, javax.swing.GroupLayout.Alignment.TRAILING))))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -275,28 +300,32 @@ public class FormularioBarco extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(TextMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(TextMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonBuscar1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(39, 39, 39)
-                        .addComponent(Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(botonBuscar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(botonBuscar)
+                    .addComponent(botonBorrar))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
                     .addComponent(Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonBuscar))
-                .addGap(21, 21, 21)
+                    .addComponent(botonBuscar1)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -308,7 +337,7 @@ public class FormularioBarco extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel1)
                                 .addComponent(TextMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
@@ -327,11 +356,16 @@ public class FormularioBarco extends javax.swing.JFrame {
                         .addGap(149, 149, 149)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botonGuardar)
-                            .addComponent(botonActualizar))
+                            .addComponent(botonCancelar))
                         .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(botonBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonBorrar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -352,9 +386,9 @@ public class FormularioBarco extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TexIdActionPerformed
 
-    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonActualizarActionPerformed
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         obtenerDatosComboBox();
@@ -389,6 +423,7 @@ public class FormularioBarco extends javax.swing.JFrame {
         TextNombre.setText(String.valueOf(TablaBarcos.getValueAt(seleccion,2 )));
         TextAmarre.setText(String.valueOf(TablaBarcos.getValueAt(seleccion,3 )));
         TextCuota.setText(String.valueOf(TablaBarcos.getValueAt(seleccion,4 )));
+        
         String socio=String.valueOf(TablaBarcos.getValueAt(seleccion, 5));
         int idSocio=Integer.parseInt(socio);
         
@@ -398,6 +433,97 @@ public class FormularioBarco extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_TablaBarcosMouseClicked
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        limpiar();
+        actualizarTabla();
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        int id=Integer.valueOf(TexId.getText());
+        String matricula=TextMatricula.getText();
+        String nombre=TextNombre.getText();
+        int amarre=Integer.parseInt(TextAmarre.getText());
+        float cuota=Float.parseFloat(TextCuota.getText());
+        
+        obtenerDatosComboBox();
+        
+        int idSocio=this.socioID;
+        String nombreSocio=this.socioNombre;
+        
+        Barco B=new Barco(id, matricula,nombre,amarre,cuota, idSocio,nombreSocio);
+        
+        opCrud.actualizar(B);
+        actualizarTabla();
+        limpiar();
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+        int idBarco=Integer.parseInt(TexId.getText());
+        
+        opCrud.eliminar(idBarco);
+        
+        limpiar();
+        actualizarTabla();
+   
+    }//GEN-LAST:event_botonBorrarActionPerformed
+
+    private void botonBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscar1ActionPerformed
+        DefaultTableModel modelo=new DefaultTableModel();
+        modelo.addColumn("id");
+        modelo.addColumn("matricula");
+        modelo.addColumn("nombre");
+        modelo.addColumn("amarre");
+        modelo.addColumn("cuota");
+        modelo.addColumn("socioID");
+        modelo.addColumn("socioNombre");
+        
+        TablaBarcos.setModel(modelo);
+        
+        String datos[] =new String[7];
+        
+        int idBarco=Integer.parseInt(Busqueda.getText());
+        
+        
+        
+        try {
+            ConexionBaseDatos con = new ConexionBaseDatos();
+            Connection co = con.getConexionBaseDatos();
+            
+            PreparedStatement pps=co.prepareStatement("SELECT * FROM cubnautico.barco where id=?;");
+            
+            pps.setInt(1, idBarco);
+            
+            pps.executeQuery();
+            while(pps.getResultSet().next()){
+                
+                Barco barco=new Barco();
+                
+                barco.setId(pps.getResultSet().getInt(1));
+                barco.setMatricula(pps.getResultSet().getString(2));
+                barco.setNombre(pps.getResultSet().getString(3));
+                barco.setNumeroAmarre(pps.getResultSet().getInt(4));
+                barco.setCuota(pps.getResultSet().getFloat(5));
+                barco.setIdSocio(pps.getResultSet().getInt(6));
+                barco.setNombreSocio(pps.getResultSet().getString(7));
+                
+                datos[0]=String.valueOf(barco.getId());
+                datos[1]=String.valueOf(barco.getMatricula());
+                datos[2]=String.valueOf(barco.getNombre());
+                datos[3]=String.valueOf(barco.getNumeroAmarre());
+                datos[4]=String.valueOf(barco.getCuota());
+                datos[5]=String.valueOf(barco.getIdSocio());
+                datos[6]=String.valueOf(barco.getNombreSocio());
+                
+                modelo.addRow(datos);
+            }
+            TablaBarcos.setModel(modelo);
+            con.getConexionBaseDatos().close();
+        } catch (SQLException e) {
+            System.out.println("error "+e.getMessage());
+        }
+        
+    }//GEN-LAST:event_botonBuscar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,8 +539,10 @@ public class FormularioBarco extends javax.swing.JFrame {
     private javax.swing.JTextField TextCuota;
     private javax.swing.JTextField TextMatricula;
     private javax.swing.JTextField TextNombre;
-    private javax.swing.JToggleButton botonActualizar;
+    private javax.swing.JToggleButton botonBorrar;
     private javax.swing.JToggleButton botonBuscar;
+    private javax.swing.JToggleButton botonBuscar1;
+    private javax.swing.JToggleButton botonCancelar;
     private javax.swing.JToggleButton botonGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -427,3 +555,5 @@ public class FormularioBarco extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
+
+

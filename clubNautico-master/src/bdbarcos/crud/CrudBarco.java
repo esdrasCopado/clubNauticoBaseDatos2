@@ -49,32 +49,56 @@ public class CrudBarco {
         }
        
     }
-//    public void actualizar(Socio s){
-//        ConexionBaseDatos con=new ConexionBaseDatos();
-//        Connection co=con.getConexionBaseDatos();
-//        ResultSet resultSet = null;
-//        Statement statement = null;
-//
-//        try {
-//            
-//            System.out.println(s.getId()+" "+s.getNombre()+" "+s.getTelefono()+" "+s.getDireccion());
-//            PreparedStatement pps=co.prepareStatement("update socio set idsocio=?,nombre=?,direccion=?,correoElec=?,telefono=? where idsocio=?;");
-//            pps.setInt(1, s.getId());
-//            pps.setString(2, s.getNombre());
-//            pps.setString(3, s.getDireccion());
-//            pps.setString(4, s.getCorreo());
-//            pps.setString(5, s.getTelefono());
-//            
-//            pps.setInt(6,s.getId() );
-//            
-//            
-//
-//            pps.executeUpdate();
-//            
-//            
-//            con.getConexionBaseDatos().close();
-//        } catch (SQLException e) {
-//            Logger.getLogger(FormularioSocio.class.getName()).log(Level.SEVERE, null, e);
-//        }
-//    }
+    public void actualizar(Barco B)
+    {
+        ConexionBaseDatos con=new ConexionBaseDatos();
+        Connection co=con.getConexionBaseDatos();
+        ResultSet resultSet = null;
+        Statement statement = null;
+
+        try {
+            
+            
+            PreparedStatement pps=co.prepareStatement("update barco set id=?,matricula=?,nombre=?,amarre=?,cuota=?,socio_idsocio=?,socio_nombre=? where id=?;");
+            pps.setInt(1, B.getId());
+            pps.setString(2, B.getMatricula());
+            pps.setString(3, B.getNombre());
+            pps.setInt(4, B.getNumeroAmarre());
+            pps.setFloat(5, B.getCuota());
+            pps.setInt(6, B.getId());
+            pps.setString(7, B.getNombreSocio());
+            
+            pps.setInt(8,B.getId() );
+            
+            
+
+            pps.executeUpdate();
+            
+            
+            
+            con.getConexionBaseDatos().close();
+        } catch (SQLException e) {
+            Logger.getLogger(FormularioSocio.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    public void eliminar(int idBarco){
+        ConexionBaseDatos con=new ConexionBaseDatos();
+        Connection co=con.getConexionBaseDatos();
+        
+        try {
+            PreparedStatement pps=co.prepareStatement("delete from barco where id=?;");
+            
+            pps.setInt(1, idBarco);
+            
+            pps.executeUpdate();
+            
+            
+            
+            con.getConexionBaseDatos().close();
+        } catch (Exception e) {
+        }
+        
+        
+    }
 }
